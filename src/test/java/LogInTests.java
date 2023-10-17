@@ -26,11 +26,7 @@ public class LogInTests extends BasicTest{
     public void displaysErrorsWhenUserDoesNotExist(){
         String email = "non-existing-user@gmal.com";
         String password = "password123";
-        navPage.clickOnLoginNavButton();
-
-        loginPage.getEmailInput().sendKeys(email);
-        loginPage.getPasswordInput().sendKeys(password);
-        loginPage.clickOnLoginButton();
+        loginPage.autoLogin(email,password);
         loginPage.waitForErrorPopupToBeVisible();
 
         String errorMessage = loginPage.getErrorLoginPopupMessage();
@@ -43,11 +39,7 @@ public class LogInTests extends BasicTest{
     public void displaysErrorsWhenPasswordIsWrong(){
         String email = "admin@admin.com";
         String password = "password123";
-        navPage.clickOnLoginNavButton();
-
-        loginPage.getEmailInput().sendKeys(email);
-        loginPage.getPasswordInput().sendKeys(password);
-        loginPage.clickOnLoginButton();
+        loginPage.autoLogin(email, password);
         loginPage.waitForErrorPopupToBeVisible();
 
         String errorMessage = loginPage.getErrorLoginPopupMessage();
@@ -61,13 +53,15 @@ public class LogInTests extends BasicTest{
         String email = "admin@admin.com";
         String password = "12345";
 
-        navPage.clickOnLoginNavButton();
-
-        loginPage.getEmailInput().sendKeys(email);
-        loginPage.getPasswordInput().sendKeys(password);
-        loginPage.clickOnLoginButton();
+        loginPage.autoLogin(email,password);
         wait
                 .withMessage("Url should be for home page.")
                 .until(ExpectedConditions.urlToBe(baseUrl + "/home"));
     }
+    @Test(priority = 6, retryAnalyzer = RetryAnalyzer.class)
+    public void logout(){
+        navPage.waitUntilLogoutButtonIsVisible();
+        navPage.clickOnLogoutButton();
+    }
+
 }

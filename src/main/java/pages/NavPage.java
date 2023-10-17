@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NavPage extends BasicPage{
@@ -27,4 +28,16 @@ public class NavPage extends BasicPage{
     public void clickOnLoginNavButton() {
         getLoginNavButton().click();
     }
+    public WebElement getLogoutButton () {
+        return driver.findElement(By.className("btnLogout"));
+    }
+    public void clickOnLogoutButton () {
+        getLogoutButton().click();
+    }
+    public void waitUntilLogoutButtonIsVisible () {
+        wait
+                .withMessage("Logout button should be visible.")
+                .until(ExpectedConditions.visibilityOf(getLogoutButton()));
+}
+
 }
