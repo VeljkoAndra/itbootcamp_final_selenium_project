@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
 import pages.NavPage;
+import pages.SingupPage;
 
 import java.time.Duration;
 
@@ -17,6 +18,7 @@ public abstract class BasicTest {
     protected String baseUrl = "https://vue-demo.daniel-avellaneda.com";
     protected NavPage navPage;
     protected LoginPage loginPage;
+    protected SingupPage singupPage;
     @BeforeClass
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -27,6 +29,7 @@ public abstract class BasicTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         navPage = new NavPage(driver, wait);
         loginPage = new LoginPage(driver, wait);
+        singupPage = new SingupPage(driver,wait);
     }
     @BeforeMethod
     public void beforMethod(){
