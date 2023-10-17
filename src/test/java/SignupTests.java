@@ -1,3 +1,4 @@
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import retryAnalyzer.RetryAnalyzer;
@@ -35,5 +36,25 @@ public class SignupTests extends BasicTest {
         Assert.assertEquals(errorMessage, "E-mail already exists", "Message from popup should be like expected message");
 
         Assert.assertEquals(driver.getCurrentUrl(), baseUrl + "/signup", "Urls should be similar.");
+    }
+    @Test (priority = 4, retryAnalyzer = RetryAnalyzer.class)
+    public void signup(){
+        String name = "Veljkoo Andrijasevi";
+        String email = "veljkoo.andrijaseviccc1@itbootcamp.rs";
+        String password = "12345";
+        String confirmPassword = "12345";
+        navPage.clickOnSingupButton();
+
+        singupPage.autoSingup(name, email, password, confirmPassword);
+
+        wait
+                .withMessage("Url should be for home page.")
+                .until(ExpectedConditions.urlToBe(baseUrl+ "/home"));
+
+        messagePopUpPage.waitForVerifyPopUpMessage();
+        Assert.assertEquals(messagePopUpPage.getVerifPopupMessage(), "IMPORTANT: Verify your account");
+        messagePopUpPage.clickOnVerifyPopupCloseButton();
+        navPage.clickOnLogoutButton();
+
     }
 }
