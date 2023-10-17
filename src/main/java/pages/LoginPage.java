@@ -24,13 +24,6 @@ public class LoginPage extends BasicPage{
     public void clickOnLoginButton(){
         getLoginButton().click();
     }
-    public void waitForErrorPopupToBeVisible() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.v-snack__content")));
-    }
-    public String getErrorLoginPopupMessage(){
-        WebElement errorElement = driver.findElement(By.cssSelector("div > div.v-snack__content > ul > li"));
-        return errorElement.getText();
-    }
 
     public void autoLogin(String email, String password){
         navPage.clickOnLoginNavButton();

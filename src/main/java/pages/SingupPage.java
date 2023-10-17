@@ -27,13 +27,6 @@ public class SingupPage extends BasicPage{
     public WebElement getSingMeUpButton(){
         return driver.findElement(By.cssSelector("button[type=\"submit\"]"));
     }
-    public void waitForErrorPopupToBeVisible() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.v-snack__content")));
-    }
-    public String getErrorSingupPopupMessage(){
-        WebElement errorElement = driver.findElement(By.cssSelector("div > div.v-snack__content > ul > li"));
-        return errorElement.getText();
-    }
     public void clickOnSingMeUpButton(){
         getSingMeUpButton().click();
     }

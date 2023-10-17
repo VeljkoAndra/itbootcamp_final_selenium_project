@@ -7,6 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
+import pages.MessagePopUpPage;
 import pages.NavPage;
 import pages.SingupPage;
 
@@ -19,6 +20,7 @@ public abstract class BasicTest {
     protected NavPage navPage;
     protected LoginPage loginPage;
     protected SingupPage singupPage;
+    protected MessagePopUpPage messagePopUpPage;
     @BeforeClass
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -30,6 +32,7 @@ public abstract class BasicTest {
         navPage = new NavPage(driver, wait);
         loginPage = new LoginPage(driver, wait);
         singupPage = new SingupPage(driver,wait);
+        messagePopUpPage = new MessagePopUpPage(driver, wait);
     }
     @BeforeMethod
     public void beforMethod(){
