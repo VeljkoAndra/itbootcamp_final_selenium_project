@@ -8,6 +8,10 @@ public class AuthRoutesTests extends BasicTest{
         driver.get(baseUrl + "/home");
         Assert.assertEquals(driver.getCurrentUrl(), baseUrl + "/login", "Current url should be " + baseUrl + "/login");
     }
-
+    @Test (priority = 2, retryAnalyzer = RetryAnalyzer.class)
+    public void visitProfilePage(){
+        driver.get(baseUrl + "/profile");
+        Assert.assertEquals(driver.getCurrentUrl(), baseUrl + "/login", "Current url should be " + baseUrl + "/login");
+    }
 
 }
