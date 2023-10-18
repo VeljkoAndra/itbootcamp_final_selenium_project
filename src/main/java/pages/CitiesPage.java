@@ -28,9 +28,18 @@ public class CitiesPage extends BasicPage{
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#app > div.v-dialog__content.v-dialog__content--active > div > div")));
     }
 
+    public WebElement getSearchField(){
+        return driver.findElement(By.id("search"));
+    }
+
+    public void sendValueOnSearchField(String oldCityName){
+        getSearchField().sendKeys(oldCityName);
+    }
+
     public WebElement getCityInputField() {
         return driver.findElement(By.cssSelector("#name"));
     }
+
     public void enterCityName(String cityName) {
         WebElement cityNameInput = driver.findElement(By.cssSelector("#name"));
         cityNameInput.sendKeys(Keys.CONTROL + "a");
@@ -41,9 +50,20 @@ public class CitiesPage extends BasicPage{
     public void clickOnSaveButton(){
         driver.findElement(By.cssSelector("div.v-card__actions > button.btnSave")).click();
     }
+
     public String getMessagePopupText() {
         WebElement messagePopup = driver.findElement(By.cssSelector(".success .v-snack__content"));
         return messagePopup.getText();
+    }
+
+    public void waitForNumberOfRowsInTableToBe(int expectedNumberOfRows) {
+        List<WebElement> rows = driver.findElements(By.cssSelector(".v-data-table__wrapper tbody tr"));
+        Assert.assertEquals(rows.size(), expectedNumberOfRows);
+    }
+
+
+    public void clickOnEditButtonForFirstRow() {
+        driver.findElement(By.cssSelector("#edit")).click();
     }
 
 }
