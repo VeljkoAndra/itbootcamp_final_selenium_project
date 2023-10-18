@@ -18,4 +18,9 @@ public class AuthRoutesTests extends BasicTest{
         driver.get(baseUrl + "/admin/cities");
         Assert.assertEquals(driver.getCurrentUrl(), baseUrl + "/login", "Current url should be " + baseUrl + "/login");
     }
+    @Test (priority = 4, retryAnalyzer = RetryAnalyzer.class)
+    public void forbidsVisitsToAdminUsersUrlIfNotAuthenticated(){
+        driver.get(baseUrl + "/admin/users");
+        Assert.assertEquals(driver.getCurrentUrl(), baseUrl + "/login", "Current url should be " + baseUrl + "/login");
+    }
 }
