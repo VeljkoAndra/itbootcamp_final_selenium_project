@@ -32,7 +32,7 @@ public class SignupTests extends BasicTest {
 
         messagePopUpPage.waitForErrorPopupToBeVisible();
 
-        String errorMessage = messagePopUpPage.getErrorPopupMessage();
+        String errorMessage = messagePopUpPage.getErrorPopupMessageText();
         Assert.assertEquals(errorMessage, "E-mail already exists", "Message from popup should be like expected message");
 
         Assert.assertEquals(driver.getCurrentUrl(), baseUrl + "/signup", "Urls should be similar.");
@@ -52,7 +52,7 @@ public class SignupTests extends BasicTest {
                 .until(ExpectedConditions.urlToBe(baseUrl+ "/home"));
 
         messagePopUpPage.waitForVerifyPopUpMessage();
-        Assert.assertEquals(messagePopUpPage.getVerifPopupMessage(), "IMPORTANT: Verify your account");
+        Assert.assertEquals(messagePopUpPage.getTextForVerifPopupMessage(), "IMPORTANT: Verify your account");
         messagePopUpPage.clickOnVerifyPopupCloseButton();
         navPage.clickOnLogoutButton();
 

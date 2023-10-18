@@ -51,7 +51,7 @@ public class AdminCitiesTests extends BasicTest{
         
         citiesPage.clickOnSaveButton();
         
-        messagePopUpPage.waitForSavedSuccefulyPopup();
+        messagePopUpPage.waitForMessagePopupToBeVisible();
 
         Assert.assertTrue(citiesPage.getMessagePopupText().contains("Saved successfully"));
 
@@ -75,7 +75,7 @@ public class AdminCitiesTests extends BasicTest{
         
         citiesPage.clickOnSaveButton();
         
-        messagePopUpPage.waitForSavedSuccefulyPopup();
+        messagePopUpPage.waitForMessagePopupToBeVisible();
         
         Assert.assertTrue(citiesPage.getMessagePopupText().contains("Saved successfully"));
     }
@@ -92,5 +92,30 @@ public class AdminCitiesTests extends BasicTest{
 
         String firstRowCityName = citiesPage.getFirstRowName();
         Assert.assertEquals(editedCityName, firstRowCityName);
+    }
+    @Test (priority = 6, retryAnalyzer = RetryAnalyzer.class)
+    public void deleteCity(){
+        String editedCityName = "Dubrava's city";
+        navPage.clickOnAdminButton();
+
+        citiesPage.clickOnCitiesButton();
+
+        citiesPage.sendValueOnSearchField(editedCityName);
+
+        citiesPage.waitForNumberOfRowsInTableToBe(1);
+
+        String firstRowCityName = citiesPage.getFirstRowName();
+        Assert.assertEquals(editedCityName, firstRowCityName);
+
+        citiesPage.clickOnDeleteButtonForFirstRow();
+
+        citiesPage.waitForDeletePopUpMessage();
+
+        citiesPage.clickOnDeleteButton();
+
+        messagePopUpPage.waitForMessagePopupToBeVisible();
+        Assert.assertTrue(messagePopUpPage.getDeletedSuccessfullyText().contains("Deleted successfully"));
+
+
     }
 }
