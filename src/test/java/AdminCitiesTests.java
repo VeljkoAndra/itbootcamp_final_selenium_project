@@ -10,9 +10,13 @@ public class AdminCitiesTests extends BasicTest{
         String password = "12345";
 
         loginPage.autoLogin(username,password);
+        
         navPage.clickOnAdminButton();
+        
         navPage.waitUntilCitiesIsVisible();
+        
         navPage.clickOnCitiesButton();
+        
         Assert.assertEquals(driver.getCurrentUrl(), baseUrl+ "/admin/cities", "Url should contains \"/admin/cities\" after base url.");
     }
     @Test(priority = 2, retryAnalyzer = RetryAnalyzer.class)
@@ -36,11 +40,17 @@ public class AdminCitiesTests extends BasicTest{
         String city = "Kursumlija's city";
 
         navPage.clickOnAdminButton();
+        
         citiesPage.clickOnCitiesButton();
+        
         citiesPage.clickOnNewItemButton();
+        
         citiesPage.waitForCreateEditCityDialogToAppear();
+        
         citiesPage.enterCityName(city);
+        
         citiesPage.clickOnSaveButton();
+        
         messagePopUpPage.waitForSavedSuccefulyPopup();
 
         Assert.assertTrue(citiesPage.getMessagePopupText().contains("Saved successfully"));
@@ -49,17 +59,38 @@ public class AdminCitiesTests extends BasicTest{
     @Test (priority = 4, retryAnalyzer = RetryAnalyzer.class)
     public void editCity(){
         String oldCityName = "Kursumlija's city";
-        String newCityName = "Dubrava's city";
+        String editedCityName = "Dubrava's city";
 
         navPage.clickOnAdminButton();
+        
         citiesPage.clickOnCitiesButton();
+        
         citiesPage.sendValueOnSearchField(oldCityName);
+        
         citiesPage.waitForNumberOfRowsInTableToBe(1);
+        
         citiesPage.clickOnEditButtonForFirstRow();
-        citiesPage.enterCityName(newCityName);
+        
+        citiesPage.enterCityName(editedCityName);
+        
         citiesPage.clickOnSaveButton();
+        
         messagePopUpPage.waitForSavedSuccefulyPopup();
+        
         Assert.assertTrue(citiesPage.getMessagePopupText().contains("Saved successfully"));
     }
+    @Test (priority = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void searchCity(){
+        String editedCityName = "Dubrava's city";
+        navPage.clickOnAdminButton();
+        
+        citiesPage.clickOnCitiesButton();
+        
+        citiesPage.sendValueOnSearchField(editedCityName);
 
+        citiesPage.waitForNumberOfRowsInTableToBe(1);
+
+        String firstRowCityName = citiesPage.getFirstRowName();
+        Assert.assertEquals(editedCityName, firstRowCityName);
+    }
 }
