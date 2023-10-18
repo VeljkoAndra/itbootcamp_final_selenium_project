@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class MessagePopUpPage extends BasicPage{
     public MessagePopUpPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -30,5 +32,13 @@ public class MessagePopUpPage extends BasicPage{
     public void clickOnVerifyPopupCloseButton(){
         getVerifyPopupCloseButton().click();
     }
-//hidden-sm-and-down btnLogout
+    public void waitForSavedSuccefulyPopup(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div")));
+    }
+    public String getMessagePopupText() {
+        WebElement messagePopup = driver.findElement(By.cssSelector(".success .v-snack__content"));
+        return messagePopup.getText();
+    }
+
 }
