@@ -94,4 +94,15 @@ public class NavPage extends BasicPage{
         getFrenchLanguage().click();
     }
 
+    public void clickOnMyProfileButton(){
+        driver.findElement(By.xpath("//*[@id=\"app\"]/div/div/header/div/div[3]/a[3]/span/i")).click();
+    }
+    public void waitUntilCurrentUrlContainsHome() {
+        wait
+                .withMessage("Current url should contain '/home'.")
+                .until(ExpectedConditions.urlContains("/home"));
+    }
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
 }
