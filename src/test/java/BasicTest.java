@@ -19,6 +19,7 @@ public abstract class BasicTest {
     protected SingupPage singupPage;
     protected MessagePopUpPage messagePopUpPage;
     protected CitiesPage citiesPage;
+    protected ProfilePage profilePage;
     @BeforeClass
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -32,6 +33,7 @@ public abstract class BasicTest {
         singupPage = new SingupPage(driver,wait);
         messagePopUpPage = new MessagePopUpPage(driver, wait);
         citiesPage = new CitiesPage(driver, wait);
+        profilePage = new ProfilePage(driver, wait);
     }
     @BeforeMethod
     public void beforMethod(){
